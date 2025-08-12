@@ -1,0 +1,21 @@
+[package]
+name = "entity_graphql"
+version = "0.1.0"
+edition = "2021"
+authors = ["gql <gql@gamescilite.com>"]
+
+[lib]
+path = "src/lib.rs"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+sea-orm = { version = "1" }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+
+[dependencies.seaography]
+git = "https://git.7k7k.com/starlink/seagraphy.git"
+rev = "f73c0f171fda69e7374e65e84101b46d876f3d86"
+features = ["with-decimal", "with-chrono", "with-json", "with-postgres-array"]
