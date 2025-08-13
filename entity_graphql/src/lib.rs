@@ -2,7 +2,96 @@
 
 pub mod prelude;
 
-pub mod artifactory;
-pub mod artifactory_runtime;
+pub mod doc_module_versions;
+pub mod doc_modules;
+pub mod doc_versions;
+pub mod fc_cfg_approval_flow;
+pub mod feature_config;
+pub mod feature_config_conflict;
+pub mod feature_config_history;
+pub mod feature_config_label_inc;
+pub mod feature_config_label_lv1;
+pub mod feature_config_label_lv2;
+pub mod feature_config_label_lv3;
+pub mod feature_config_label_lv4;
+pub mod feature_config_label_strategy_labels;
+pub mod feature_config_layer_rule_ids;
+pub mod feature_config_layer_rule_zh_cn;
+pub mod feature_config_layers;
+pub mod feature_config_layers_sol_all;
+pub mod feature_setting;
+pub mod feature_tag_config;
+pub mod feature_tag_config_history;
+pub mod mod_app;
+pub mod sea_orm_active_enums;
+pub mod solution;
+pub mod solution_draft;
+pub mod solution_history;
+pub mod solution_label;
+pub mod solution_way;
+pub mod solution_way_history;
+pub mod solution_workflow;
+pub mod st_polling_log;
+pub mod st_polling_task;
+pub mod st_wf_approval_flow;
+pub mod st_wf_sol_pack;
+pub mod st_wf_sol_pack_deploy_log;
+pub mod st_wf_solution;
+pub mod st_wf_solution_item;
+pub mod st_workflow;
+pub mod st_yunxiao_blackbox_test_events;
+pub mod st_yunxiao_blackbox_test_events_history;
+pub mod st_yunxiao_task_events;
+pub mod st_yunxiao_task_events_history;
 
-seaography::register_entity_modules_read_only!([artifactory, artifactory_runtime,]);
+seaography::register_entity_modules_read_only!([
+    doc_module_versions,
+    doc_modules,
+    doc_versions,
+    fc_cfg_approval_flow,
+    feature_config,
+    feature_config_conflict,
+    feature_config_history,
+    feature_config_label_inc,
+    feature_config_label_lv1,
+    feature_config_label_lv2,
+    feature_config_label_lv3,
+    feature_config_label_lv4,
+    feature_config_label_strategy_labels,
+    feature_config_layer_rule_ids,
+    feature_config_layer_rule_zh_cn,
+    feature_config_layers,
+    feature_config_layers_sol_all,
+    feature_setting,
+    feature_tag_config,
+    feature_tag_config_history,
+    mod_app,
+    solution,
+    solution_draft,
+    solution_history,
+    solution_label,
+    solution_way,
+    solution_way_history,
+    solution_workflow,
+    st_polling_log,
+    st_polling_task,
+    st_wf_approval_flow,
+    st_wf_sol_pack,
+    st_wf_sol_pack_deploy_log,
+    st_wf_solution,
+    st_wf_solution_item,
+    st_workflow,
+    st_yunxiao_blackbox_test_events,
+    st_yunxiao_blackbox_test_events_history,
+    st_yunxiao_task_events,
+    st_yunxiao_task_events_history,
+]);
+seaography::register_active_enums!([
+    sea_orm_active_enums::Econflicttype,
+    sea_orm_active_enums::Efeatureplatform,
+    sea_orm_active_enums::Esolutionstate,
+    sea_orm_active_enums::Estwftype,
+    sea_orm_active_enums::Ewaytype,
+    sea_orm_active_enums::Labelalgotype,
+    sea_orm_active_enums::Labeltype,
+]);

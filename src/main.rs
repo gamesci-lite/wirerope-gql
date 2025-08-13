@@ -129,12 +129,8 @@ async fn main() -> std::io::Result<()> {
                 tracing::info!("graphql schema init success");
                 tracing::info!("Visit GraphQL Playground at {:?}", state_host);
                 let mut builder = seaography::Builder::new(&GRAPHQL_BUILD_CTX, conn_graph.clone());
-                
-                // builder = entity_graphql::register_entity_modules(builder);
-                // #[cfg(feature = "graphql-enum")]
-                // {
-                //     builder = entity_graphql::register_active_enums(builder);
-                // }
+                builder = entity_graphql::register_entity_modules(builder);
+                builder = entity_graphql::register_active_enums(builder);
                 let schema = builder
                     .schema_builder()
                     .data(conn_graph)
