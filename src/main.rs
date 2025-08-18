@@ -138,17 +138,17 @@ async fn main() -> std::io::Result<()> {
                     .expect("graphql schema init failed");
                 c.app_data(Data::new(schema.clone()));
                 c.service(
-                    web::resource("/health")
+                    web::resource("/gql/health")
                         .guard(actix_web::guard::Get())
                         .to(|| async { actix_web::HttpResponse::Ok().body("ok") }),
                 );
                 c.service(
-                    web::resource("/gql")
+                    web::resource("/gql/")
                         .guard(actix_web::guard::Post())
                         .to(graphql_index),
                 );
                 c.service(
-                    web::resource("/gql")
+                    web::resource("/gql/")
                         .guard(actix_web::guard::Get())
                         .to(graphql_playground),
                 );
