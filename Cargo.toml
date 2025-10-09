@@ -46,6 +46,7 @@ sea-orm = { version = "1", features = [
     "sqlx-postgres",
     "macros",
     "with-json",
+    "with-uuid"
 ], default-features = false }
 #=====redis=====
 redis = { version = "0.32", default-features = false, features = [
@@ -86,7 +87,7 @@ default-features = false
 [dependencies.seaography]
 git = "https://git.7k7k.com/starlink/seagraphy.git"
 rev = "f73c0f171fda69e7374e65e84101b46d876f3d86"
-features = ["with-decimal", "with-chrono", "with-json", "with-postgres-array"]
+features = ["with-decimal", "with-chrono", "with-json", "with-postgres-array", "with-uuid"]
 
 [dependencies.async-graphql-actix-web]
 version = "7.0"
