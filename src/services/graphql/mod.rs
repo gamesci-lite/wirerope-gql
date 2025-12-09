@@ -27,7 +27,7 @@ pub async fn graphql_index(schema: web::Data<Schema>, req: GraphQLRequest) -> Gr
 }
 
 pub async fn graphql_playground() -> Result<HttpResponse> {
-    let p_source = playground_source(GraphQLPlaygroundConfig::new("/hfrog"));
+    let p_source = playground_source(GraphQLPlaygroundConfig::new("/gql/"));
     Ok(HttpResponse::Ok()
         .content_type("text/html; charset=utf-8")
         .body(p_source))
