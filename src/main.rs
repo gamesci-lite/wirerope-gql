@@ -16,6 +16,10 @@ use redis::{aio::MultiplexedConnection, AsyncConnectionConfig, Client};
 use sea_orm::{ConnectOptions, Database};
 use std::{str::FromStr, time::Duration};
 use tracing_actix_web::TracingLogger;
+use mimalloc::MiMalloc;
+
+#[global_allocator]
+static GLOBAL: MiMalloc = MiMalloc;
 
 #[cfg(all(feature = "metrics"))]
 use metrics::{RequestMetrics, RequestTracing};
@@ -165,5 +169,5 @@ async fn main() -> std::io::Result<()> {
         .bind((rt_setting.base.host.as_str(), rt_setting.base.port))?
         .run()
         .await
-    
+
 }

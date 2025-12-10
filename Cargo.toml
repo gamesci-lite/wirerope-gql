@@ -30,6 +30,7 @@ dotenv = "0.15.0"
 awc = { version = "3.7", features = ["rustls-0_21"] }
 url = "2"
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+mimalloc = { version = "*", features = ["v3"] }
 #====log====
 log = "0.4"
 tracing = "0.1.41"
