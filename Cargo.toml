@@ -40,12 +40,15 @@ tracing-loki = { version = "0.2.6", default-features = false, features = [
     "rustls",
     "compat-0-2-1",
 ] }
+# postgres-array: [sea-query/postgres-array, sea-query-binder?/postgres-array, sea-orm-macros/postgres-array]
+# postgres-vector: [pgvector, sea-query/postgres-vector, sea-query-binder?/postgres-vector]
 #====db====
 sea-orm = { version = "1", features = [
     "runtime-actix-rustls",
     "sqlx-postgres",
     "macros",
     "with-json",
+    "postgres-array",
     "with-uuid"
 ], default-features = false }
 #=====redis=====
