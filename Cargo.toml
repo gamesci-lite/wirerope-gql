@@ -102,3 +102,11 @@ default-features = false
 [dev-dependencies]
 opentelemetry-stdout = { version = "0.30", features = ["trace", "metrics"] }
 serde_json = { version = "1" }
+
+
+[profile.release]
+lto = "fat"
+opt-level = "z"   # 优化大小
+codegen-units = 1
+debug = false
+strip = true
