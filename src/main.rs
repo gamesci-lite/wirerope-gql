@@ -12,11 +12,11 @@ use config::{log::LogConfig, RuntimeSetting};
 use dao::seaorm_mysql::AppState;
 use dotenv::dotenv;
 use log::LevelFilter;
+use mimalloc::MiMalloc;
 use redis::{aio::MultiplexedConnection, AsyncConnectionConfig, Client};
 use sea_orm::{ConnectOptions, Database};
 use std::{str::FromStr, time::Duration};
 use tracing_actix_web::TracingLogger;
-use mimalloc::MiMalloc;
 
 #[global_allocator]
 static GLOBAL: MiMalloc = MiMalloc;
@@ -86,14 +86,14 @@ async fn main() -> std::io::Result<()> {
         // replica dao
         let db_replica_connection = {
             if rt_setting.dao.db_replica_addr.len() > 0 {
-            let con = init_sql_connection(&rt_setting.dao.db_replica_addr, log_level)
-                .await
-                .map_err(|e| {
-                    std::io::Error::new(
-                        std::io::ErrorKind::Other,
-                        format!("Connect to sql failed! Err:{:?}", e),
-                    )
-                })?;
+                let con = init_sql_connection(&rt_setting.dao.db_replica_addr, log_level)
+                    .await
+                    .map_err(|e| {
+                        std::io::Error::new(
+                            std::io::ErrorKind::Other,
+                            format!("Connect to sql failed! Err:{:?}", e),
+                        )
+                    })?;
                 Some(con)
             } else {
                 None
@@ -123,18 +123,22 @@ async fn main() -> std::io::Result<()> {
                 DError::Custom(error::LogicErr::ParamsError(body_err.to_string())).into()
             })) // All GraphQL
             .configure(move |c| {
-                use actix_web::web::Data;
                 use crate::services::graphql::{
                     graphql_index, graphql_json, graphql_playground, GRAPHQL_BUILD_CTX,
                 };
+                use actix_web::web::Data;
                 use entity_graphql;
                 // DEPTH_LIMIT
                 // COMPLEXITY_LIMIT
                 tracing::info!("graphql schema init success");
                 tracing::info!("Visit GraphQL Playground at {:?}", state_host);
                 let mut builder = seaography::Builder::new(&GRAPHQL_BUILD_CTX, conn_graph.clone());
-                builder = entity_graphql::register_entity_modules(builder);
                 builder = entity_graphql::register_active_enums(builder);
+                builder = entity_graphql::register_entity_modules(builder);
+                // entity_graphql::register_active_enums(builder);
+                // sea_orm::register_entity_modules!(builder);
+                // builder = entity_graphql::register_entity_modules(builder);
+                // builder = entity_graphql::register_active_enums(builder);
                 let schema = builder
                     .schema_builder()
                     .data(conn_graph)
@@ -165,9 +169,7 @@ async fn main() -> std::io::Result<()> {
         app
     });
 
-    svr
-        .bind((rt_setting.base.host.as_str(), rt_setting.base.port))?
+    svr.bind((rt_setting.base.host.as_str(), rt_setting.base.port))?
         .run()
         .await
-
 }
