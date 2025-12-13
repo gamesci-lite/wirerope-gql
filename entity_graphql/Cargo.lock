@@ -1855,8 +1855,8 @@ checksum = "1c107b6f4780854c8b126e228ea8869f4d7b71260f962fefb57b996b8959ba6b"
 
 [[package]]
 name = "seaography"
-version = "1.1.4"
-source = "git+https://git.7k7k.com/starlink/seagraphy.git?rev=3ac8102ae7be5d1c1a15990a9d2d0699c4845214#3ac8102ae7be5d1c1a15990a9d2d0699c4845214"
+version = "1.1.4-rc.2"
+source = "git+https://git.7k7k.com/starlink/seagraphy.git?rev=bc4f4d40b0c4f7d72268bbc80127eee279c647f8#bc4f4d40b0c4f7d72268bbc80127eee279c647f8"
 dependencies = [
  "async-graphql",
  "fnv",
