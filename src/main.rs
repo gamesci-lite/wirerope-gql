@@ -133,12 +133,13 @@ async fn main() -> std::io::Result<()> {
                 tracing::info!("graphql schema init success");
                 tracing::info!("Visit GraphQL Playground at {:?}", state_host);
                 let mut builder = seaography::Builder::new(&GRAPHQL_BUILD_CTX, conn_graph.clone());
-                builder = entity_graphql::register_active_enums(builder);
-                builder = entity_graphql::register_entity_modules(builder);
-                // entity_graphql::register_active_enums(builder);
-                // sea_orm::register_entity_modules!(builder);
-                // builder = entity_graphql::register_entity_modules(builder);
+
+                // 注册 active enums（如果数据库有枚举类型）
+                // 如果数据库没有枚举，sea-orm-cli 不会生成 register_active_enums 函数
+                // 此时需要手动注释掉下面这行，或者在 entity_graphql/src/lib.rs 中添加空实现
                 // builder = entity_graphql::register_active_enums(builder);
+
+                builder = entity_graphql::register_entity_modules(builder);
                 let schema = builder
                     .schema_builder()
                     .data(conn_graph)
