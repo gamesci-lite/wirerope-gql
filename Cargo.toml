@@ -91,7 +91,7 @@ default-features = false
 [dependencies.seaography]
 # path = "/Users/admin/data0/private_work/seaography"
 git = "https://github.com/dwbmio/seaography.git"
-branch = "main"
+branch = "1.1.x"
 features = ["with-decimal", "with-chrono", "with-json", "with-postgres-array", "with-uuid"]
 
 [dependencies.async-graphql-actix-web]
