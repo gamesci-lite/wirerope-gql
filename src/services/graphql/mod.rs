@@ -14,7 +14,18 @@ use crate::error::DResult;
 use crate::services::vo::RespVO;
 
 lazy_static::lazy_static! {
-    pub static ref GRAPHQL_BUILD_CTX: BuilderContext = BuilderContext::default();
+    pub static ref GRAPHQL_BUILD_CTX: BuilderContext = {
+        let mut ctx = BuilderContext::default();
+        ctx.column_select_expressions.insert(
+            "feature_config.labels".into(),
+            "array_to_json(\"labels\")::jsonb".into(),
+        );
+        ctx.column_select_expressions.insert(
+            "feature_config_history.labels".into(),
+            "array_to_json(\"labels\")::jsonb".into(),
+        );
+        ctx
+    };
 }
 
 pub async fn graphql_json(schema: web::Data<Schema>, req: GraphQLRequest) -> DResult {
