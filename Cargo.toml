@@ -1,5 +1,5 @@
 [package]
-name = "{{project-name}}"
+name = "hs-client-gql"
 version = "0.0.0"
 edition = "2021"
 authors = ["gql <gql@gamescilite.com>"]
@@ -50,7 +50,7 @@ sea-orm = { version = "1", features = [
     "macros",
     "with-json",
     "postgres-array",
-    "with-uuid"
+    "with-uuid",
 ], default-features = false }
 #=====redis=====
 redis = { version = "0.32", default-features = false, features = [
@@ -92,7 +92,13 @@ default-features = false
 # path = "/Users/admin/data0/private_work/seaography"
 git = "ssh://git@github.com/gamesci-lite/seaography.git"
 branch = "1.1.x"
-features = ["with-decimal", "with-chrono", "with-json", "with-postgres-array", "with-uuid"]
+features = [
+    "with-decimal",
+    "with-chrono",
+    "with-json",
+    "with-postgres-array",
+    "with-uuid",
+]
 
 [dependencies.async-graphql-actix-web]
 version = "7.0"
